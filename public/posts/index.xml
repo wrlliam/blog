@@ -2,19 +2,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on wrlliam</title>
-    <link>http://localhost:1313/posts/</link>
+    <link>https://blog.wrlliam.me/posts/</link>
     <description>Recent content in Posts on wrlliam</description>
     <generator>Hugo</generator>
     <language>en</language>
     <copyright>© William Banham &amp; [Joe Roe - Risotto Theme](https://joeroe.io).</copyright>
-    <lastBuildDate>Sun, 04 May 2025 23:44:56 +0100</lastBuildDate>
-    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>My First Post</title>
-      <link>http://localhost:1313/posts/my-first-post/</link>
-      <pubDate>Sun, 04 May 2025 23:44:56 +0100</pubDate>
-      <guid>http://localhost:1313/posts/my-first-post/</guid>
-      <description>Introduction This is bold text, and this is emphasized text.&#xA;Visit the Hugo website!</description>
-    </item>
+    <lastBuildDate></lastBuildDate>
+    <atom:link href="https://blog.wrlliam.me/posts/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
