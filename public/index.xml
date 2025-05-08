@@ -7,7 +7,14 @@
     <generator>Hugo</generator>
     <language>en</language>
     <copyright>© William Banham &amp; [Joe Roe - Risotto Theme](https://joeroe.io).</copyright>
-    <lastBuildDate></lastBuildDate>
+    <lastBuildDate>Tue, 06 May 2025 22:31:06 +0100</lastBuildDate>
     <atom:link href="https://blog.wrlliam.me/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>What You Need to Start Building a Real Homelab</title>
+      <link>https://blog.wrlliam.me/homelab/what-you-need-to-start-building-a-real-homelab/</link>
+      <pubDate>Tue, 06 May 2025 22:31:06 +0100</pubDate>
+      <guid>https://blog.wrlliam.me/homelab/what-you-need-to-start-building-a-real-homelab/</guid>
+      <description>The Basics </description>
+    </item>
   </channel>
 </rss>
