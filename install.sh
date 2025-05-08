@@ -9,8 +9,8 @@ echo "Starting Hugo installation process on Ubuntu..."
 
 # Install necessary tools (curl, wget) if they are missing
 echo "Ensuring necessary tools (curl, wget) are installed..."
-sudo apt update
-sudo apt install -y curl wget
+apt update
+apt install -y curl wget
 
 # Check if curl or wget is now available
 if ! command_exists curl && ! command_exists wget; then
@@ -22,8 +22,8 @@ echo "curl or wget successfully installed or already present."
 
 # Try installing using apt-get first
 echo "Trying to install Hugo via apt-get..."
-sudo apt-get update
-sudo apt-get install -y hugo
+apt-get update
+apt-get install -y hugo
 
 # Check if hugo is now available and get its version from apt
 APT_HUGO_VERSION=""
@@ -54,7 +54,7 @@ else
     echo "The version installed via apt-get (v${APT_HUGO_VERSION}) is older than the latest (v${LATEST_HUGO_VERSION}). Installing the latest binary."
     # Optionally remove the apt version if you only want the latest binary
     # echo "Removing the apt-get version of Hugo... (Optional)"
-    # sudo apt-get remove -y hugo
+    # apt-get remove -y hugo
   else
     echo "Hugo was not successfully installed via apt-get. Installing the latest binary."
   fi
@@ -115,8 +115,8 @@ echo "Extracting to /usr/local/bin/..."
 
 # Extract the binary to a directory in the PATH
 # Ensure /usr/local/bin exists
-sudo mkdir -p /usr/local/bin/
-sudo tar -xzf "${HUGO_TEMP_FILE}" -C /usr/local/bin/
+mkdir -p /usr/local/bin/
+tar -xzf "${HUGO_TEMP_FILE}" -C /usr/local/bin/
 
 # Clean up the temporary file
 rm "${HUGO_TEMP_FILE}"
