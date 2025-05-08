@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Homelabs on wrlliam</title>
+    <link>https://blog.wrlliam.me/homelab/</link>
+    <description>Recent content in Homelabs on wrlliam</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <copyright>© William Banham &amp; [Joe Roe - Risotto Theme](https://joeroe.io).</copyright>
+    <lastBuildDate>Tue, 06 May 2025 22:31:06 +0100</lastBuildDate>
+    <atom:link href="https://blog.wrlliam.me/homelab/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>What You Need to Start Building a Real Homelab</title>
+      <link>https://blog.wrlliam.me/homelab/what-you-need-to-start-building-a-real-homelab/</link>
+      <pubDate>Tue, 06 May 2025 22:31:06 +0100</pubDate>
+      <guid>https://blog.wrlliam.me/homelab/what-you-need-to-start-building-a-real-homelab/</guid>
+      <description>The Basics </description>
+    </item>
+  </channel>
+</rss>
