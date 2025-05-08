@@ -5,13 +5,25 @@ command_exists() {
   command -v "$1" >/dev/null 2>&1
 }
 
-echo "Attempting to install the latest Hugo version on Ubuntu..."
+echo "Starting Hugo installation process on Ubuntu..."
+
+# Install necessary tools (curl, wget) if they are missing
+echo "Ensuring necessary tools (curl, wget) are installed..."
+sudo apt update
+sudo apt install -y curl wget
+
+# Check if curl or wget is now available
+if ! command_exists curl && ! command_exists wget; then
+  echo "Failed to install curl or wget. Cannot proceed with binary download. Exiting."
+  exit 1
+fi
+echo "curl or wget successfully installed or already present."
+
 
 # Try installing using apt-get first
 echo "Trying to install Hugo via apt-get..."
-apt-get update
-apt-get install curl 
-apt-get install -y hugo
+sudo apt-get update
+sudo apt-get install -y hugo
 
 # Check if hugo is now available and get its version from apt
 APT_HUGO_VERSION=""
@@ -41,8 +53,8 @@ else
   if [ -n "$APT_HUGO_VERSION" ]; then
     echo "The version installed via apt-get (v${APT_HUGO_VERSION}) is older than the latest (v${LATEST_HUGO_VERSION}). Installing the latest binary."
     # Optionally remove the apt version if you only want the latest binary
-    # echo "Removing the apt-get version of Hugo..."
-    #  apt-get remove -y hugo
+    # echo "Removing the apt-get version of Hugo... (Optional)"
+    # sudo apt-get remove -y hugo
   else
     echo "Hugo was not successfully installed via apt-get. Installing the latest binary."
   fi
@@ -63,7 +75,7 @@ case "$ARCH" in
     HUGO_BINARY="hugo_extended_${LATEST_HUGO_VERSION}_linux-arm64.tar.gz"
     ;;
   armhf|armv7l)
-    HUGO_BINARY="hugo_extended_${LATEST_HUGO_VERSION}_linux-armhf.tar.gz"
+    HUGO_BINARY="hugo_extended_${LATEST_VERSION}_linux-armhf.tar.gz" # Note: Used LATEST_VERSION here, should be LATEST_HUGO_VERSION
     ;;
   *)
     echo "Unsupported architecture: ${ARCH}. Cannot download binary."
@@ -71,20 +83,28 @@ case "$ARCH" in
     ;;
 esac
 
+# Fix: Corrected the variable name in the armhf case
+if [ "$ARCH" = "armhf" ] || [ "$ARCH" = "armv7l" ]; then
+  HUGO_BINARY="hugo_extended_${LATEST_HUGO_VERSION}_linux-armhf.tar.gz"
+fi
+
+
 HUGO_DOWNLOAD_URL="https://github.com/gohugoio/hugo/releases/download/v${LATEST_HUGO_VERSION}/${HUGO_BINARY}"
 HUGO_TEMP_FILE="/tmp/${HUGO_BINARY}"
 
 echo "Downloading ${HUGO_DOWNLOAD_URL}..."
 
-# Download the binary
-if command_exists wget; then
-  wget "${HUGO_DOWNLOAD_URL}" -O "${HUGO_TEMP_FILE}"
-elif command_exists curl; then
+# Download the binary using either curl or wget
+if command_exists curl; then
   curl -L "${HUGO_DOWNLOAD_URL}" -o "${HUGO_TEMP_FILE}"
+elif command_exists wget; then
+  wget "${HUGO_DOWNLOAD_URL}" -O "${HUGO_TEMP_FILE}"
 else
-  echo "Neither wget nor curl found. Cannot download Hugo binary. Please install wget or curl and try again."
+  # This case should theoretically not be reached due to the initial check, but as a fallback
+  echo "Neither curl nor wget found despite installation attempt. Cannot download Hugo binary. Exiting."
   exit 1
 fi
+
 
 if [ ! -f "${HUGO_TEMP_FILE}" ]; then
   echo "Download failed. Hugo binary not found at ${HUGO_TEMP_FILE}. Exiting."
@@ -95,8 +115,8 @@ echo "Extracting to /usr/local/bin/..."
 
 # Extract the binary to a directory in the PATH
 # Ensure /usr/local/bin exists
- mkdir -p /usr/local/bin/
- tar -xzf "${HUGO_TEMP_FILE}" -C /usr/local/bin/
+sudo mkdir -p /usr/local/bin/
+sudo tar -xzf "${HUGO_TEMP_FILE}" -C /usr/local/bin/
 
 # Clean up the temporary file
 rm "${HUGO_TEMP_FILE}"
@@ -110,4 +130,5 @@ else
   exit 1
 fi
 
+echo "Hugo installation process finished."
 exit 0
